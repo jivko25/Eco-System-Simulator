@@ -8,47 +8,45 @@ import Item from '../src/components/item/Item'
 import { useState } from 'react'
 import AddItem from '../src/components/add-item-modal/AddItem'
 
+
 // title
 // births
 // deaths
 // killed
-const test = 
-[
-  {
-    title: 'rabbits',
-    births: 50,
-    deaths: 10
-  },
-  {
-    title: 'foxes',
-    births: 30,
-    deaths: 120
-  }
-]
 
 
 export default function Home() {
-  const [animals, setAnimals] = useState(test);
+  const [animals, setAnimals] = useState({});
   const [openAddDialog, setOpenAddDialog] = useState(false);
-
   const addItem = (title) => {
+    console.log(typeof Array.from(animals));
     const animal = {
       title,
       births : 0,
       deaths : 0
     }
-    const newAnimals = animals.push(animal)
+    console.log(animal);
+    const newAnimals = animals;
+    newAnimals[title] = animal;
+    console.log(newAnimals);
     setAnimals(newAnimals)
+  }
+
+  const onValuesChange = (value) => {
+    setAnimals(value);
     console.log(animals);
   }
   return (
     <div className={styles.wrapper}>
         <Button onClick={() => setOpenAddDialog(true)}>Add</Button>
+        <Button onClick={() => {console.log(animals);}}>START</Button>
       <Grid container spacing={2}>
         <Grid item xs={8}>
           {
-            test.map(item => {
-              return <Item data={item} otherAnimals={test} key={item.title}/>
+            Object.keys(animals)?.map(item => {
+              return (
+              <Item data={animals[item]} otherAnimals={animals} key={animals[item].title} onValuesChange={(value) => {onValuesChange(value)}}/>
+              )
             })
           }
         </Grid>

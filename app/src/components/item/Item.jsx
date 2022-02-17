@@ -6,10 +6,29 @@ import Typography from '@mui/material/Typography'
 import AddITem from "../add-item-modal/AddItem";
 import Button from '@mui/material/Button'
 
-export default function Item({data, otherAnimals}){
+export default function Item({data, otherAnimals, onValuesChange}){
+    console.log(data.title);
 
     const [births, setBirths] = useState(data.births);
     const [deaths, setDeaths] = useState(data.deaths);
+
+    const handleChangeBirths = (value) => {
+        setBirths(value);
+        otherAnimals[data.title] = {title : data.title, births, deaths}
+        onValuesChange(otherAnimals);
+    }
+
+    const handleChangeDeaths = (value) => {
+        setDeaths(value);
+        otherAnimals[data.title] = {title : data.title, births, deaths}
+        onValuesChange(otherAnimals);
+    }
+
+    const handleChangeKills = (value, title) => {
+        otherAnimals[data.title][title] = value
+        onValuesChange(otherAnimals);
+    }
+
     return(
         <div className={styles.wrapper}>
             <Grid container spacing={3}>
@@ -22,31 +41,23 @@ export default function Item({data, otherAnimals}){
                     <TextField
                         label="Births"
                         value={births}
-                        onChange={(e) => {setBirths(e.target.value)}}
+                        onChange={(e) => {handleChangeBirths(Number(e.target.value))}}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
                         label="Deaths"
                         value={deaths}
-                        onChange={(e) => {setDeaths(e.target.value)}}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        label="Deaths"
-                        value={deaths}
-                        onChange={(e) => {setDeaths(e.target.value)}}
+                        onChange={(e) => {handleChangeDeaths(Number(e.target.value))}}
                     />
                 </Grid>
                 {
-                    otherAnimals.map(item => {
+                    Object.keys(otherAnimals)?.map(item => {
                         return (
-                            <Grid item key={item.title}>
+                            <Grid item key={otherAnimals[item].title}>
                                 <TextField
-                                    label={item.title}
-                                    value={deaths}
-                                    onChange={(e) => {setDeaths(e.target.value)}}
+                                    label={data.title !== otherAnimals[item].title ? `Killed by ${otherAnimals[item].title}s/es` : `Killed by other ${otherAnimals[item].title}s/es`}
+                                    onChange={(e) => {handleChangeKills(Number(e.target.value), otherAnimals[item].title)}}
                                 />
                             </Grid>
                                 )
