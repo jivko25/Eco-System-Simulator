@@ -3,14 +3,17 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { useState } from "react";
 import Typography from '@mui/material/Typography'
+import AddITem from "../add-item-modal/AddItem";
+import Button from '@mui/material/Button'
 
 export default function Item({data, otherAnimals}){
+
     const [births, setBirths] = useState(data.births);
     const [deaths, setDeaths] = useState(data.deaths);
     return(
         <div className={styles.wrapper}>
             <Grid container spacing={3}>
-                <Grid item xs={2}>
+                <Grid item xs={12}>
                     <Typography variant="h3" color="initial">
                         {data.title}
                     </Typography>
@@ -39,7 +42,7 @@ export default function Item({data, otherAnimals}){
                 {
                     otherAnimals.map(item => {
                         return (
-                            <Grid item>
+                            <Grid item key={item.title}>
                                 <TextField
                                     label={item.title}
                                     value={deaths}
