@@ -10,8 +10,8 @@ import {
   } from 'chart.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
-  import { Line } from 'react-chartjs-2';
-import PopulationTable from '../table/table';
+import { Line } from 'react-chartjs-2';
+import PopulationTable from '../table/PopulationTable';
   
   ChartJS.register(
     CategoryScale,
