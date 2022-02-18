@@ -10,8 +10,6 @@ import Paper from '@mui/material/Paper';
 
 
 export default function PopulationTable({data}) {
-    console.log(data);
-    console.log('test');
   return (
     <table>
             {
