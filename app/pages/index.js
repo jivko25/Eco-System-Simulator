@@ -40,16 +40,26 @@ export default function Home() {
 
   return (
     <div className={styles.wrapper}>
-        <Button onClick={() => setOpenAddDialog(true)}>Add</Button>
-        <Button onClick={() => {console.log(animals);setAction(old => !old)}}>START</Button>
-        <Button onClick={() => setOpenHelp(true)}>Help</Button>
-        <TextField
-          label="Yeats"
-          value={years}
-          onChange={(e) => {setYears(e.target.value)}}
-        />
       <Grid container spacing={2}>
         <Grid item xs={8}>
+      <Grid container justifyContent="center">
+        <Grid item xs={2}>
+          <Button onClick={() => setOpenAddDialog(true)}>Add</Button>
+        </Grid>
+        <Grid item xs={2}>
+          <Button onClick={() => {console.log(animals);setAction(old => !old)}}>START</Button>
+        </Grid>
+        <Grid item xs={2}>
+          <Button onClick={() => setOpenHelp(true)}>Help</Button>
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            label="Years"
+            value={years}
+            onChange={(e) => {setYears(e.target.value)}}
+          />
+        </Grid>
+      </Grid>
           {
             Object.keys(animals)?.map(item => {
               return (

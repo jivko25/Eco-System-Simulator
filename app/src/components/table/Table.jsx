@@ -22,7 +22,7 @@ export default function PopulationTable({data}) {
                         {
                             element.data.map(el => {
                                 return(
-                                    <th>{el}</th>
+                                    <th>{el.toFixed(0)}</th>
                                 )
                             })
                         }
