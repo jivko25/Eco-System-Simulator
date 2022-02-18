@@ -13,14 +13,14 @@ export default function PopulationTable({data}) {
   return (
     <table>
             {
-                data.map(element => {
+                data.map((element, index) => {
                     return (
-                    <tr>
+                    <tr key={index}>
                         <th>{element.label}</th>
                         {
-                            element.data.map(el => {
+                            element.data.map((el, inx) => {
                                 return(
-                                    <th>{el.toFixed(0)}</th>
+                                    <th key={inx}>{el.toFixed(0)}</th>
                                 )
                             })
                         }
