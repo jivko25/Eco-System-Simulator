@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import { useEffect } from 'react';
   import { Line } from 'react-chartjs-2';
+import PopulationTable from '../table/table';
   
   ChartJS.register(
     CategoryScale,
@@ -63,9 +64,12 @@ import { useEffect } from 'react';
         let newData = Math.floor(temp.population + temp.population*(temp.births/100) - temp.population*(temp.deaths/100));
         Object.keys(animals[item]).forEach(prop => {
             if(prop !== 'births' && prop !== 'deaths' && prop !== 'population' && prop !== 'title'){
-                console.log(animals[item][prop]);
-                newData -= animals[prop].population * animals[item][prop];
-                console.log(animals[prop].population * animals[item][prop]);
+                if(newData - (animals[prop].population * animals[item][prop]) <= 0){
+                    newData = 0
+                }
+                else{
+                    newData -= animals[prop].population * animals[item][prop];
+                }
             }
         })
         // console.log(typeof newData);
@@ -94,6 +98,7 @@ import { useEffect } from 'react';
       return(
           <div>
             <Line options={options} data={data} />
+            <PopulationTable data={chartData}/>
           </div>
       )
   }

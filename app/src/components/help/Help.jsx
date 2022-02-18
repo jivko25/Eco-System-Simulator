@@ -18,7 +18,7 @@ export default function Help({open, onClose}){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={onClose} fullWidth>Close</Button>
         </DialogActions>
       </Dialog>
     )
