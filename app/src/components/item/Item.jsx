@@ -7,20 +7,18 @@ import AddITem from "../add-item-modal/AddItem";
 import Button from '@mui/material/Button'
 
 export default function Item({data, otherAnimals, onValuesChange}){
-    console.log(data.title);
-
     const [births, setBirths] = useState(data.births);
     const [deaths, setDeaths] = useState(data.deaths);
 
     const handleChangeBirths = (value) => {
         setBirths(value);
-        otherAnimals[data.title] = {title : data.title, births, deaths}
+        otherAnimals[data.title] = {title : data.title, births : value, deaths, population: data.population}
         onValuesChange(otherAnimals);
     }
 
-    const handleChangeDeaths = (value) => {
+    function handleChangeDeaths(value){
         setDeaths(value);
-        otherAnimals[data.title] = {title : data.title, births, deaths}
+        otherAnimals[data.title] = {title : data.title, births, deaths : value, population: data.population}
         onValuesChange(otherAnimals);
     }
 
@@ -33,8 +31,8 @@ export default function Item({data, otherAnimals, onValuesChange}){
         <div className={styles.wrapper}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Typography variant="h3" color="initial">
-                        {data.title}
+                    <Typography variant="h5" color="initial">
+                        {data.title} - {data.population}
                     </Typography>
                 </Grid>
                 <Grid item>
